@@ -52,7 +52,7 @@ module "azure_postgresql_database" {
 
   name                = var.postgresql_database_name
   resource_group_name = module.azure_resource_group.resource_group_name
-  server_name         = var.postgresql_server_name
+  server_name         = module.azure_postgresql_server.postgresql_server_name
   charset             = var.postgresql_database_charset
   collation           = var.postgresql_database_collation
 }
