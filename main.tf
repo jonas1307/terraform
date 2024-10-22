@@ -28,25 +28,3 @@ module "azure_app_service" {
   resource_group_name = module.azure_resource_group.resource_group_name
   service_plan_id     = module.azure_service_plan.service_plan_id
 }
-
-module "azure_mssql_server" {
-  source              = "./modules/azure_mssql_server"
-
-  name                = var.sql_server_name
-  location            = module.azure_resource_group.resource_group_location
-  resource_group_name = module.azure_resource_group.resource_group_name
-  admin_username      = var.sql_admin_username
-  admin_password      = var.sql_admin_password
-}
-
-module "azure_mssql_database" {
-  source       = "./modules/azure_mssql_database"
-
-  name         = var.sql_database_name
-  server_id    = module.azure_mssql_server.sql_server_server_id
-  collation    = var.sql_database_collation
-  license_type = var.sql_database_license_type
-  max_size_gb  = var.sql_database_max_size_gb
-  sku_name     = var.sql_database_sku_name
-  enclave_type = var.sql_database_enclave_type
-}
