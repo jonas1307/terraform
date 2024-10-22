@@ -19,3 +19,13 @@ module "azure_service_plan" {
   sku_name            = var.service_plan_sku_name
   os_type             = var.service_plan_os_type
 }
+
+module "azure_app_service" {
+  source              = "./modules/azure_app_service"
+
+  name                = var.app_service_name
+  location            = module.azure_resource_group.resource_group_location
+  resource_group_name = module.azure_resource_group.resource_group_name
+  service_plan_id     = module.azure_service_plan.service_plan_id
+}
+
