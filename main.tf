@@ -30,29 +30,26 @@ module "azure_app_service" {
   aspnetcore_environment = var.app_service_aspnetcore_environment
 }
 
-module "azure_postgresql_server" {
-  source                       = "./modules/azure_postgresql_server"
+module "azure_postgresql_flexible_server" {
+  source                        = "./modules/azure_postgresql_flexible_server"
 
-  name                         = var.postgresql_server_name
-  location                     = module.azure_resource_group.resource_group_location
-  resource_group_name          = module.azure_resource_group.resource_group_name
-  sku_name                     = var.postgresql_server_sku_name
-  storage_mb                   = var.postgresql_server_storage_mb
-  backup_retention_days        = var.postgresql_server_backup_retention_days
-  geo_redundant_backup_enabled = var.postgresql_server_geo_redundant_backup_enabled
-  auto_grow_enabled            = var.postgresql_server_auto_grow_enabled
-  administrator_login          = var.postgresql_server_administrator_login
-  administrator_login_password = var.postgresql_server_administrator_login_password
-  server_version               = var.postgresql_server_version
-  ssl_enforcement_enabled      = var.postgresql_server_ssl_enforcement_enabled
+  name                          = var.postgresql_flexible_server_name
+  resource_group_name           = module.azure_resource_group.resource_group_name
+  location                      = module.azure_resource_group.resource_group_location
+  server_version                = var.postgresql_flexible_server_server_version
+  public_network_access_enabled = var.postgresql_flexible_server_public_network_access_enabled
+  administrator_login           = var.postgresql_flexible_server_administrator_login
+  administrator_password        = var.postgresql_flexible_server_administrator_password
+  storage_mb                    = var.postgresql_flexible_server_storage_mb
+  storage_tier                  = var.postgresql_flexible_server_storage_tier
+  sku_name                      = var.postgresql_flexible_server_sku_name
 }
 
-module "azure_postgresql_database" {
-  source              = "./modules/azure_postgresql_database"
+module "azure_postgresql_flexible_server_database" {
+  source    = "./modules/azure_postgresql_flexible_server_database"
 
-  name                = var.postgresql_database_name
-  resource_group_name = module.azure_resource_group.resource_group_name
-  server_name         = module.azure_postgresql_server.postgresql_server_name
-  charset             = var.postgresql_database_charset
-  collation           = var.postgresql_database_collation
+  name      = var.postgresql_flexible_server_database_name
+  server_id = module.azure_postgresql_flexible_server.id
+  collation = var.postgresql_flexible_server_database_collation
+  charset   = var.postgresql_flexible_server_database_charset
 }
