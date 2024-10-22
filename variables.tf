@@ -38,3 +38,69 @@ variable "app_service_aspnetcore_environment" {
   description = "The ASPNETCORE_ENVIRONMENT variable for the App Service"
   type        = string
 }
+
+variable "postgresql_server_name" {
+  description = "The name of the PostgreSQL server."
+  type        = string
+}
+
+variable "postgresql_server_sku_name" {
+  description = "The SKU name for the PostgreSQL server, defining performance levels."
+  type        = string
+}
+
+variable "postgresql_server_storage_mb" {
+  description = "The maximum storage for the PostgreSQL server in megabytes."
+  type        = number
+}
+
+variable "postgresql_server_backup_retention_days" {
+  description = "The number of days to retain backups for the PostgreSQL server."
+  type        = number
+}
+
+variable "postgresql_server_geo_redundant_backup_enabled" {
+  description = "Whether geo-redundant backups are enabled for the PostgreSQL server."
+  type        = bool
+}
+
+variable "postgresql_server_auto_grow_enabled" {
+  description = "Whether auto-grow is enabled for the PostgreSQL server storage."
+  type        = bool
+}
+
+variable "postgresql_server_administrator_login" {
+  description = "The administrator login name for the PostgreSQL server."
+  type        = string
+}
+
+variable "postgresql_server_administrator_login_password" {
+  description = "The administrator login password for the PostgreSQL server."
+  type        = string
+  sensitive   = true
+}
+
+variable "postgresql_server_version" {
+  description = "The version of PostgreSQL to use for the server."
+  type        = string
+}
+
+variable "postgresql_server_ssl_enforcement_enabled" {
+  description = "Whether SSL enforcement is enabled for the PostgreSQL server."
+  type        = bool
+}
+
+variable "postgresql_database_name" {
+  description = "The name of the PostgreSQL database."
+  type        = string
+}
+
+variable "postgresql_database_charset" {
+  description = "The character set to use for the PostgreSQL database."
+  type        = string
+}
+
+variable "postgresql_database_collation" {
+  description = "The collation setting for the PostgreSQL database."
+  type        = string
+}
