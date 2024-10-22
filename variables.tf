@@ -33,3 +33,8 @@ variable "app_service_name" {
   description = "The name of the App Service"
   type        = string
 }
+
+variable "app_service_aspnetcore_environment" {
+  description = "The ASPNETCORE_ENVIRONMENT variable for the App Service"
+  type        = string
+}

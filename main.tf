@@ -23,8 +23,9 @@ module "azure_service_plan" {
 module "azure_app_service" {
   source              = "./modules/azure_app_service"
 
-  name                = var.app_service_name
-  location            = module.azure_resource_group.resource_group_location
-  resource_group_name = module.azure_resource_group.resource_group_name
-  service_plan_id     = module.azure_service_plan.service_plan_id
+  name                   = var.app_service_name
+  location               = module.azure_resource_group.resource_group_location
+  resource_group_name    = module.azure_resource_group.resource_group_name
+  service_plan_id        = module.azure_service_plan.service_plan_id
+  aspnetcore_environment = var.app_service_aspnetcore_environment
 }

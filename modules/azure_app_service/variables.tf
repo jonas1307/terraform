@@ -17,3 +17,8 @@ variable "service_plan_id" {
   description = "The ID of the Service Plan"
   type        = string
 }
+
+variable "aspnetcore_environment" {
+  description = "The ASPNETCORE_ENVIRONMENT variable for the App Service"
+  type        = string
+}

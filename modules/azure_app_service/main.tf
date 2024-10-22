@@ -4,7 +4,7 @@ resource "azurerm_linux_web_app" "app" {
   resource_group_name = var.resource_group_name
   service_plan_id     = var.service_plan_id
   app_settings = {
-    ASPNETCORE_ENVIRONMENT = "Development"
+    ASPNETCORE_ENVIRONMENT = var.aspnetcore_environment
   }
 
   site_config {
