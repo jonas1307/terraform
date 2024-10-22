@@ -29,3 +29,12 @@ module "azure_app_service" {
   service_plan_id     = module.azure_service_plan.service_plan_id
 }
 
+module "azure_mssql_server" {
+  source              = "./modules/azure_mssql_server"
+
+  name                = var.sql_server_name
+  location            = module.azure_resource_group.resource_group_location
+  resource_group_name = module.azure_resource_group.resource_group_name
+  admin_username      = var.sql_admin_username
+  admin_password      = var.sql_admin_password
+}
