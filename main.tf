@@ -1,3 +1,14 @@
+terraform {
+  required_version = ">= 1.9"
+
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.5"
+    }
+  }
+}
+
 provider "azurerm" {
   features {}
   subscription_id = var.azure_subscription_id
@@ -28,6 +39,8 @@ module "azure_app_service" {
   resource_group_name    = module.azure_resource_group.resource_group_name
   service_plan_id        = module.azure_service_plan.service_plan_id
   aspnetcore_environment = var.app_service_aspnetcore_environment
+  dotnet_version         = var.app_service_dotnet_version
+  postgresql_connection_string = "Host=${module.azure_postgresql_flexible_server.fqdn};Database=${module.azure_postgresql_flexible_server_database.name};Username=${var.postgresql_flexible_server_administrator_login};Password=${var.postgresql_flexible_server_administrator_password};Ssl Mode=Require;"
 }
 
 module "azure_postgresql_flexible_server" {

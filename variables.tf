@@ -22,6 +22,11 @@ variable "service_plan_name" {
 variable "service_plan_os_type" {
   description = "The O/S type for the App Services to be hosted in this plan. Possible values include Windows, Linux, and WindowsContainer. Changing this forces a new resource to be created."
   type        = string
+
+  validation {
+    condition     = contains(["Windows", "Linux", "WindowsContainer"], var.service_plan_os_type)
+    error_message = "os_type must be one of: Windows, Linux, WindowsContainer."
+  }
 }
 
 variable "service_plan_sku_name" {
@@ -39,6 +44,12 @@ variable "app_service_aspnetcore_environment" {
   type        = string
 }
 
+variable "app_service_dotnet_version" {
+  description = "The .NET version to use for the App Service application stack (e.g., 8.0, 9.0, 10.0)."
+  type        = string
+  default     = "10.0"
+}
+
 variable "postgresql_flexible_server_name" {
   description = "The name of the PostgreSQL flexible server."
   type        = string
@@ -47,6 +58,11 @@ variable "postgresql_flexible_server_name" {
 variable "postgresql_flexible_server_server_version" {
   description = "The version of PostgreSQL to use for the flexible server."
   type        = string
+
+  validation {
+    condition     = contains(["11", "12", "13", "14", "15", "16"], var.postgresql_flexible_server_server_version)
+    error_message = "server_version must be one of: 11, 12, 13, 14, 15, 16."
+  }
 }
 
 variable "postgresql_flexible_server_public_network_access_enabled" {

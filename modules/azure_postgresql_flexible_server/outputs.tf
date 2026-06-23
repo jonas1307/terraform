@@ -5,7 +5,7 @@ output "fqdn" {
 
 output "name" {
   description = "The name of the PostgreSQL flexible server"
-  value       = var.name
+  value       = azurerm_postgresql_flexible_server.pgfs.name
 }
 
 output "id" {
